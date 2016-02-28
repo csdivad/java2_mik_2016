@@ -1,4 +1,4 @@
-package hu.sol.mik.hw.test.taglib;
+package hu.csdivad.hw.taglib;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -17,8 +17,9 @@ public class Taglib1 extends SimpleTagSupport {
 		jspBody.invoke(sw);
 		JspWriter out = getJspContext().getOut();
 		out.print("Hello ");
-		out.print(sw.);
+		out.print(sw);
 		out.print('!');
+		out.flush();
 	}
 	
 }

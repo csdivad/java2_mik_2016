@@ -1,7 +1,7 @@
-package hu.sol.mik.hw.test.bean;
+package hu.csdivad.hw.bean;
 
 public class HelloBean {
-	private String sayHello = "Hello Dávid!";
+	private String sayHello = "Hello DÃ¡vid!";
 
 	public String getSayHello() {
 		return sayHello;
