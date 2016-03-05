@@ -19,6 +19,8 @@
 		<javax.servlet.version>3.1.0</javax.servlet.version>
 		<jsp.api.version>2.2</jsp.api.version>
 		<maven.compiler.version>3.5.1</maven.compiler.version>
+		<wildfly.plugin.version>1.1.0.Alpha7</wildfly.plugin.version>
+		<!-- <wildfly.plugin.version>1.0.2.Final</wildfly.plugin.version> -->
 	</properties>
 
 	<dependencies>
@@ -77,6 +79,7 @@
 					<plugin>
 						<groupId>org.wildfly.plugins</groupId>
 						<artifactId>wildfly-maven-plugin</artifactId>
+						<version>${wildfly.plugin.version}</version>
 						<configuration>
 							<hostname>${jboss.hostname}</hostname>
 							<port>${jboss.port}</port>
@@ -100,6 +103,10 @@
 								<goals>
 									<goal>deploy</goal>
 								</goals>
+								<configuration>
+									<name>${project.artifactId}</name>
+									<runtimeName>${project.artifactId}.${project.packaging}</runtimeName>
+								</configuration>
 							</execution>
 						</executions>
 					</plugin>
