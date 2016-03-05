@@ -2,15 +2,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.csdivad</groupId>
-	<artifactId>valami</artifactId>
+	<artifactId>orai</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
 
 	<properties>
+		<jboss.username>admin</jboss.username>
+		<jboss.password>Password111</jboss.password>
+		<jboss.hostname>localhost</jboss.hostname>
+		<jboss.port>9999</jboss.port>
+		
 		<source.encoding>UTF-8</source.encoding>
+		
 		<jdk.version>1.7</jdk.version>
 		<junit.version>4.12</junit.version>
 		<javax.servlet.version>3.1.0</javax.servlet.version>
+		<jsp.api.version>2.2</jsp.api.version>
+		<maven.compiler.version>3.5.1</maven.compiler.version>
 	</properties>
 
 	<dependencies>
@@ -28,24 +36,30 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>jsp-api</artifactId> 
-			<version>2.0</version> <scope>provided</scope> </dependency> -->
-
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
-			<version>2.2</version>
+			<version>${jsp.api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 
+		<!--
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>${jsp.api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+		-->
 
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.2</version>
+				<version>${maven.compiler.version}</version>
 				<configuration>
 					<source>${jdk.version}</source>
 					<target>${jdk.version}</target>
@@ -55,4 +69,42 @@
 		</plugins>
 	</build>
 
+	<profiles>
+		<profile>
+			<id>deployToTest</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.wildfly.plugins</groupId>
+						<artifactId>wildfly-maven-plugin</artifactId>
+						<configuration>
+							<hostname>${jboss.hostname}</hostname>
+							<port>${jboss.port}</port>
+							<username>${jboss.username}</username>
+							<password>${jboss.password}</password>
+						</configuration>
+						<executions>
+							<execution>
+								<id>undeploy</id>
+								<phase>clean</phase>
+								<goals>
+									<goal>undeploy</goal>
+								</goals>
+								<configuration>
+									<ignoreMissingDeployment>false</ignoreMissingDeployment>
+								</configuration>
+							</execution>
+							<execution>
+								<id>doDeploy</id>
+								<phase>install</phase>
+								<goals>
+									<goal>deploy</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

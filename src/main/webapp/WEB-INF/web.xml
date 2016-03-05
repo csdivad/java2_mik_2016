@@ -4,7 +4,7 @@
   
   <servlet>
   		<servlet-name>helloServlet</servlet-name>
-  		<servlet-class>hu.csdivad.hw.servlet.HelloServlet</servlet-class>
+  		<servlet-class>hu.csdivad.orai.servlet.HelloServlet</servlet-class>
   </servlet>
   
   <servlet-mapping>
@@ -13,6 +13,6 @@
   </servlet-mapping>
   
   <welcome-file-list>
-    <welcome-file>index5.jsp</welcome-file>
+    <welcome-file>index6.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

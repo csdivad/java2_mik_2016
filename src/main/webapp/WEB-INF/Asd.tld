@@ -6,13 +6,13 @@
  
  <tag>
  	<name>sayHello</name>
- 	<tag-class>hu.csdivad.hw.taglib.Taglib1</tag-class>
+ 	<tag-class>hu.csdivad.orai.taglib.Taglib1</tag-class>
  	<body-content>scriptless</body-content>
  </tag>
  
  <tag>
  	<name>szorzotabla</name>
- 	<tag-class>hu.csdivad.hw.taglib.SzorzotablaTag</tag-class>
+ 	<tag-class>hu.csdivad.orai.taglib.SzorzotablaTag</tag-class>
  	<body-content>scriptless</body-content>
  	
  	<attribute>

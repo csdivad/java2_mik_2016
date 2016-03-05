@@ -1,4 +1,4 @@
-package hu.csdivad.hw.servlet;
+package hu.csdivad.orai.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;

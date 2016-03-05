@@ -1,4 +1,4 @@
-package hu.csdivad.hw.taglib;
+package hu.csdivad.orai.taglib;
 
 import java.io.IOException;
 import java.io.StringWriter;

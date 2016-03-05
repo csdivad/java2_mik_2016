@@ -1,4 +1,4 @@
-<%@page import="hu.csdivad.hw.bean.HelloBean"%>
+<%@page import="hu.csdivad.orai.bean.HelloBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%=new HelloBean().getSayHello() %>

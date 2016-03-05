@@ -1,4 +1,4 @@
-package hu.csdivad.hw.bean;
+package hu.csdivad.orai.bean;
 
 public class HelloBean {
 	private String sayHello = "Hello Dávid!";
