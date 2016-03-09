@@ -3,17 +3,28 @@
   <display-name>HelloWorld</display-name>
   
   <servlet>
-  		<servlet-name>pageServlet</servlet-name>
-  		<servlet-class>hu.csdivad.orai.servlet.PageServlet</servlet-class>
+		<servlet-name>pageServlet</servlet-name>
+ 		<servlet-class>hu.csdivad.orai.servlet.PageServlet</servlet-class>
   </servlet>
+  
+  <servlet>
+  		<servlet-name>bookServlet</servlet-name>
+  		<servlet-class>hu.csdivad.book.servlet.BookServlet</servlet-class>
+  </servlet>
+  
   
   <servlet-mapping>
   	<servlet-name>pageServlet</servlet-name>
   	<url-pattern>/page</url-pattern>
   </servlet-mapping>
   
+  <servlet-mapping>
+  	<servlet-name>bookServlet</servlet-name>
+  	<url-pattern>/book/book</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
-    <welcome-file>index6.jsp</welcome-file>
+    <welcome-file>book/konyvfel.jsp</welcome-file>
   </welcome-file-list>
   
 </web-app>

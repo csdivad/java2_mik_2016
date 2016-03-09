@@ -28,6 +28,7 @@ asd
 <a href="page?param=forward">forw</a>
 <a href="${pageContext.request.contextPath}/page?param=include">inc</a>
 <a href="${pageContext.request.contextPath}/page?param=forward">forw</a>
-
+<a href="${pageContext.request.contextPath}/book">forw</a>
+<a href="${pageContext.request.contextPath}/book">forw</a>
 </body>
 </html> 
