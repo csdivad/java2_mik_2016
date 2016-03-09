@@ -8,6 +8,26 @@
 <title>Insert title here</title>
 </head>
 <body>
+<% String[] nevek = new String[]{ 
+	"Béla",
+	"István",
+	"Dávid"
+};
+%>
+
+asd
+
+<c:forEach var="nev" items="<%=nevek %>" >
+	<mik:sayHello><c:out value="${nev}"/></mik:sayHello>
+	<br/>
+</c:forEach>
+
 <mik:szorzotabla m="10" n="3"></mik:szorzotabla>
+
+<a href="page?param=include">inc</a>
+<a href="page?param=forward">forw</a>
+<a href="${pageContext.request.contextPath}/page?param=include">inc</a>
+<a href="${pageContext.request.contextPath}/page?param=forward">forw</a>
+
 </body>
-</html>
+</html> 
