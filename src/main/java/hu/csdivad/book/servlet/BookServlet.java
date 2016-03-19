@@ -1,8 +1,6 @@
 package hu.csdivad.book.servlet;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +11,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import hu.csdivad.book.bean.Book;
 
+@SuppressWarnings("serial")
 public class BookServlet extends HttpServlet {
 
 	@Override
