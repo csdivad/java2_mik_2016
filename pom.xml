@@ -1,125 +1,31 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.csdivad</groupId>
-	<artifactId>orai</artifactId>
+	<groupId>hu.sol.pmmk</groupId>
+	<artifactId>orai-munka-parent</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 
 	<properties>
-		<jboss.username>admin</jboss.username>
-		<jboss.password>Password111</jboss.password>
-		<jboss.hostname>localhost</jboss.hostname>
-		<jboss.port>9990</jboss.port>
-
 		<source.encoding>UTF-8</source.encoding>
-
-		<jdk.version>1.7</jdk.version>
+		<jdk.version>1.8</jdk.version>
 		<junit.version>4.12</junit.version>
+		<ojdbc.version>11.2.0</ojdbc.version>
+		<hibernate.version>5.1.0.Final</hibernate.version>
+		<log4j.version>2.5</log4j.version>
+		<juplo.version>1.1.0</juplo.version>
 		<javax.servlet.version>3.1.0</javax.servlet.version>
-		<jsp.api.version>2.2</jsp.api.version>
+		<jsp.api.version>2.3.1</jsp.api.version>
+		<jstl.version>1.2</jstl.version>
+		<beanutils.version>1.9.2</beanutils.version>
 		<maven.compiler.version>3.5.1</maven.compiler.version>
+		<java2ws.plugin.version>3.1.6</java2ws.plugin.version>
 		<wildfly.plugin.version>1.1.0.Alpha7</wildfly.plugin.version>
-		<!-- <wildfly.plugin.version>1.0.2.Final</wildfly.plugin.version> -->
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>provided</scope>
-		</dependency>
+	<modules>
+		<module>orai-munka-web</module>
+		<module>orai-munka-ws-clinet</module>
+	</modules>
 
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>${javax.servlet.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
-			<version>1.9.2</version>
-			<scope>compile</scope>
-		</dependency>
-
-
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>${jsp.api.version}</version>
-			<scope>provided</scope>
-		</dependency>
-
-		<!--
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>${jsp.api.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		-->
-
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven.compiler.version}</version>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-					<encoding>${source.encoding}</encoding>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
-	<profiles>
-		<profile>
-			<id>deployToTest</id>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.wildfly.plugins</groupId>
-						<artifactId>wildfly-maven-plugin</artifactId>
-						<version>${wildfly.plugin.version}</version>
-						<configuration>
-							<hostname>${jboss.hostname}</hostname>
-							<port>${jboss.port}</port>
-							<username>${jboss.username}</username>
-							<password>${jboss.password}</password>
-						</configuration>
-						<executions>
-							<execution>
-								<id>undeploy</id>
-								<phase>clean</phase>
-								<goals>
-									<goal>undeploy</goal>
-								</goals>
-								<configuration>
-									<ignoreMissingDeployment>false</ignoreMissingDeployment>
-								</configuration>
-							</execution>
-							<execution>
-								<id>doDeploy</id>
-								<phase>install</phase>
-								<goals>
-									<goal>deploy</goal>
-								</goals>
-								<configuration>
-									<name>${project.artifactId}</name>
-									<runtimeName>${project.artifactId}.${project.packaging}</runtimeName>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>
