@@ -9,9 +9,6 @@
 	<artifactId>orai-munka-web</artifactId>
 	<packaging>war</packaging>
 
-
-
-
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>

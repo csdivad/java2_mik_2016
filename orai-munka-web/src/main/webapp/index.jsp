@@ -8,6 +8,14 @@
 </head>
 <body>
 
+<%
+  String userName = request.getRemoteUser();
+%>
+
+<span>Üdv: <%=userName %> <a href="${pageContext.request.contextPath}/logout">Kijelentkezés</a> <br><br> </span><br>
+
+<%if (request.isUserInRole("Administrator")) {%>
+
 <a href="${pageContext.request.contextPath}/page?param=include">Oldal beágyazás</a> <br>
 <a href="${pageContext.request.contextPath}/page?param=forward">Oldal továbbítás</a> <br><br>
 
@@ -16,14 +24,13 @@
 request.setAttribute( "nevek", new String[]{"Béla","István","Dávid"} ); 
 %>
 
+<%} %>
 
 <c:forEach items="${nevek}" var="nev">
 	<mik:sayHello>${nev}</mik:sayHello><br/>
 </c:forEach>
 
 <mik:useSzorzo szam1 = "10" szam2 = "10"></mik:useSzorzo><br/>
-
-
 
 </body> 
 </html>
