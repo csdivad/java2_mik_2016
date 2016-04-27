@@ -13,25 +13,26 @@
 		<servlet-name>helloServlet</servlet-name>
 		<servlet-class>hu.sol.mik.hw.test.servlet.HelloServlet</servlet-class>
 	</servlet>
-	<servlet>
-		<servlet-name>BookDetailsServlet</servlet-name>
-		<servlet-class>hu.sol.mik.book.servlet.BookDetailsServlet</servlet-class>
-	</servlet>
+
 	<servlet>
 		<servlet-name>pageServlet</servlet-name>
 		<servlet-class>hu.sol.mik.hw.test.servlet.PageServlet</servlet-class>
 	</servlet>
-	
+
 	<servlet>
-	    <servlet-name>BookListServlet</servlet-name>
-	    <servlet-class>hu.sol.mik.book.servlet.BookListServlet</servlet-class>
+		<servlet-name>spring-web</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/mvc-config.xml</param-value>
+		</init-param>
 	</servlet>
-	
-	<servlet>
-	    <servlet-name>BookEditServlet</servlet-name>
-	    <servlet-class>hu.sol.mik.book.servlet.BookEditServlet</servlet-class>
-	</servlet>
-	
+
+	<servlet-mapping>
+		<servlet-name>spring-web</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
 	<servlet-mapping>
 		<servlet-name>helloServlet</servlet-name>
 		<url-pattern>/helloServlet</url-pattern>
@@ -42,22 +43,6 @@
 		<url-pattern>/page</url-pattern>
 	</servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>BookDetailsServlet</servlet-name>
-		<url-pattern>/book/bookDetails</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>BookEditServlet</servlet-name>
-		<url-pattern>/book/bookEdit</url-pattern>
-	</servlet-mapping>
-	
-	<servlet-mapping>
-		<servlet-name>BookListServlet</servlet-name>
-		<url-pattern>/book/bookList</url-pattern>
-	</servlet-mapping>
-
-	
 	<security-constraint>
 		<display-name>Security Constraint</display-name>
 		<web-resource-collection>
@@ -78,7 +63,7 @@
 			<role-name>School</role-name>
 		</auth-constraint>
 	</security-constraint>
-	
+
 	<login-config>
 		<auth-method>FORM</auth-method>
 		<realm-name>form-auth</realm-name>
@@ -87,22 +72,22 @@
 			<form-error-page>/error.jsp</form-error-page>
 		</form-login-config>
 	</login-config>
-	
+
 	<security-role>
 		<description>Administrator</description>
 		<role-name>Administrator</role-name>
 	</security-role>
-	
+
 	<security-role>
 		<description>Manager</description>
 		<role-name>Manager</role-name>
 	</security-role>
-	
+
 	<security-role>
 		<description>School</description>
 		<role-name>School</role-name>
 	</security-role>
-	
+
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
