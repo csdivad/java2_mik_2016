@@ -7,11 +7,11 @@
 
 </h:head>
 <h:body>
-	<h:outputText value="Könyvek listája!" />
 	<h:form id="form">
-		<p:dataTable var="book" value="#{bookManagedBean.bookList}" rowKey="#{book.id}" selection="#{bookManagedBean.selectedBooks}">
+		<h:outputText value="Könyvek listája!" />
+		<p:dataTable var="book" value="#{bookManagedBean.bookList}"
+			rowKey="#{book.id}" selection="#{bookManagedBean.selectedBooks}">
 			<p:column selectionMode="multiple">
-				
 			</p:column>
 			<p:column>
 				<f:facet name="header">
@@ -40,12 +40,17 @@
 			<p:column>
 				<h:commandButton value="Szerkeszt">
 					<f:setPropertyActionListener value="#{book}"
-						target="#{bookManagedBean.editedBook}"></f:setPropertyActionListener>
+						target="#{bookManagedBean.editedBook}" />
 				</h:commandButton>
 			</p:column>
 		</p:dataTable>
 		<p:panel>
-			
+			<p:panelGrid columns="2">
+				<h:commandButton value="Új könyv felvitele"
+					actionListener="#{bookManagedBean.newBook}" />
+				<h:commandButton value="Kijelöltek törlése"
+					actionListener="#{bookManagedBean.deleteSelectedBooks}" />
+			</p:panelGrid>
 		</p:panel>
 		<p:panel rendered="#{not empty bookManagedBean.editedBook}">
 			<p:panelGrid columns="2">

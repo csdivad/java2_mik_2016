@@ -17,7 +17,7 @@ public class BookManagedBean {
 	private List<Book> bookList;
 	private Book editedBook;
 	private List<Book> selectedBooks;
-	
+
 	public BookManagedBean() {
 		this.bookDao = new BookDaoImpl();
 		listBooks();
@@ -31,13 +31,8 @@ public class BookManagedBean {
 		return bookList;
 	}
 
-	public Book getEditedBook() {
-		return editedBook;
-	}
-
-	public void setEditedBook(Book editedBook) {
-		System.out.println(editedBook);
-		this.editedBook = editedBook;
+	public void newBook() {
+		editedBook = new Book();
 	}
 
 	public void saveBook() {
@@ -50,19 +45,31 @@ public class BookManagedBean {
 		editedBook = null;
 	}
 
+	public void deleteSelectedBooks() {
+		if (!selectedBooks.isEmpty()) {
+			for (Book b : selectedBooks) {
+				bookDao.delete(b);
+			}
+			listBooks();
+			System.out.println("ja");
+		}
+	}
+
+	public Book getEditedBook() {
+		return editedBook;
+	}
+
+	public void setEditedBook(Book editedBook) {
+		System.out.println(editedBook);
+		this.editedBook = editedBook;
+	}
+
 	public List<Book> getSelectedBooks() {
 		return selectedBooks;
 	}
 
 	public void setSelectedBooks(List<Book> selectedBooks) {
 		this.selectedBooks = selectedBooks;
-	}
-	
-	public void deleteSelectedBooks() {
-		for (Book b : selectedBooks) {
-			bookDao.delete(b);
-		}
-		listBooks();
 	}
 
 }
