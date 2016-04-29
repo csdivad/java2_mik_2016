@@ -26,7 +26,7 @@
 
 	<modules>
 		<module>orai-munka-web</module>
-		<module>orai-munka-ws-clinet</module>
+		<module>orai-munka-ws-client</module>
 	</modules>
 
 </project>

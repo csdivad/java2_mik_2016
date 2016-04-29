@@ -6,7 +6,7 @@
 		<artifactId>orai-munka-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<artifactId>orai-munka-ws-clinet</artifactId>
+	<artifactId>orai-munka-ws-client</artifactId>
 
 	<build>
 		<plugins>
