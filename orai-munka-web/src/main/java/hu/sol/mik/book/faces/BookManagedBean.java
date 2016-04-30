@@ -5,6 +5,8 @@ import java.util.List;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import hu.sol.mik.book.bean.Book;
 import hu.sol.mik.book.dao.BookDao;
 import hu.sol.mik.book.dao.impl.BookDaoImpl;
@@ -60,8 +62,11 @@ public class BookManagedBean {
 	}
 
 	public void setEditedBook(Book editedBook) {
-		System.out.println(editedBook);
-		this.editedBook = editedBook;
+		try {
+			editedBook = (Book) BeanUtils.cloneBean(editedBook);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public List<Book> getSelectedBooks() {
