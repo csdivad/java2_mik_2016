@@ -1,11 +1,17 @@
 package hu.sol.mik.book.vaadin;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.vaadin.data.Property.ValueChangeEvent;
+import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.data.fieldgroup.FieldGroup.CommitException;
 import com.vaadin.data.util.BeanContainer;
 import com.vaadin.data.util.BeanItem;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
@@ -28,9 +34,11 @@ public class BookUI extends UI {
 	private BeanContainer<Long, Book> bookDataSource;
 	private BookDao bookDao;
 	protected Window editBookWindow;
+	protected List<Book> selectedBooks;
 
 	@Override
 	protected void init(VaadinRequest request) {
+		selectedBooks = new ArrayList<Book>();
 		bookDao = new BookDaoImpl();
 		this.setContent(createBookVerticalLayout());
 	}
@@ -59,9 +67,21 @@ public class BookUI extends UI {
 			}
 		});
 
-		horizontalLayout.addComponent(newBookButton);
-
+		
 		Button deleteSelectedBooksButton = new Button("Kiválasztottak törlése");
+		deleteSelectedBooksButton.addClickListener(new ClickListener() {
+			
+			@Override
+			public void buttonClick(ClickEvent event) {
+				for(Book book : selectedBooks) {
+					bookDao.delete(book);
+				}
+				selectedBooks.clear();
+				refreshTable();
+			}
+		});
+		
+		horizontalLayout.addComponent(newBookButton);
 		horizontalLayout.addComponent(deleteSelectedBooksButton);
 		return horizontalLayout;
 	}
@@ -136,7 +156,6 @@ public class BookUI extends UI {
 
 		table.setContainerDataSource(bookDataSource);
 		table.setVisibleColumns("title", "description", "author", "pubYear");
-		table.setColumnHeader("pubYear", "asd");
 		table.addGeneratedColumn("editBook", new ColumnGenerator() {
 
 			@Override
@@ -153,6 +172,35 @@ public class BookUI extends UI {
 				return editButton;
 			}
 		});
+
+		table.addGeneratedColumn("selectBook", new ColumnGenerator() {
+
+			@Override
+			public Object generateCell(final Table source, final Object itemId, final Object columnId) {
+				final CheckBox selectCheckBox = new CheckBox();
+				selectCheckBox.addValueChangeListener(new ValueChangeListener() {
+
+					@Override
+					public void valueChange(ValueChangeEvent event) {
+						BeanItem<Book> beanItem = (BeanItem<Book>) source.getItem(itemId);
+						if (selectCheckBox.getValue()) {
+							selectedBooks.add(beanItem.getBean());
+						} else {
+							selectedBooks.remove(beanItem.getBean());
+						}
+					}
+				});
+				return selectCheckBox;
+			}
+		});
+		
+		table.setColumnHeader("title", "Cím");
+		table.setColumnHeader("description", "Leírás");
+		table.setColumnHeader("author", "Szerző");
+		table.setColumnHeader("pubYear", "Publikálás éve");
+		table.setColumnHeader("editBook", "Szerkesztés");
+		table.setColumnHeader("selectBook", "Kiválasztás");
+
 		return table;
 	}
 }
