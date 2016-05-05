@@ -9,24 +9,40 @@
 	<properties>
 		<source.encoding>UTF-8</source.encoding>
 		<jdk.version>1.8</jdk.version>
-		<junit.version>4.12</junit.version>
-		<ojdbc.version>11.2.0</ojdbc.version>
-		<hibernate.version>5.1.0.Final</hibernate.version>
-		<log4j.version>2.5</log4j.version>
-		<juplo.version>1.1.0</juplo.version>
-		<javax.servlet.version>3.1.0</javax.servlet.version>
-		<jsp.api.version>2.3.1</jsp.api.version>
-		<jstl.version>1.2</jstl.version>
-		<beanutils.version>1.9.2</beanutils.version>
 		<maven.compiler.version>3.5.1</maven.compiler.version>
+		<junit.version>4.12</junit.version>
+		<log4j.version>2.5</log4j.version>
 		<java2ws.plugin.version>3.1.6</java2ws.plugin.version>
-		<wildfly.plugin.version>1.1.0.Alpha7</wildfly.plugin.version>
-		<spring.version>4.2.5.RELEASE</spring.version>
 	</properties>
-
+	
 	<modules>
 		<module>orai-munka-web</module>
 		<module>orai-munka-ws-client</module>
 	</modules>
+	
+	<profiles>
+		<profile>
+			<id>onlyWeb</id>
+			<modules>
+				<module>orai-munka-web</module>
+				<module>orai-munka-ws-client</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>onlyClient</id>
+			<modules>
+				<module>orai-munka-ws-client</module>
+			</modules>
+		</profile>
+
+		<profile>
+			<id>full</id>
+			<modules>
+				<module>orai-munka-web</module>
+				<module>orai-munka-ws-client</module>
+			</modules>
+		</profile>
+	</profiles>
 
 </project>
