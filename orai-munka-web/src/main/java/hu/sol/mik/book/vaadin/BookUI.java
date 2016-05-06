@@ -40,6 +40,9 @@ public class BookUI extends UI {
 	protected void init(VaadinRequest request) {
 		selectedBooks = new ArrayList<Book>();
 		bookDao = new BookDaoImpl();
+		bookDataSource = new BeanContainer<Long, Book>(Book.class);
+		bookDataSource.setBeanIdProperty("id");
+		bookDataSource.addAll(bookDao.listAll());
 		this.setContent(createBookVerticalLayout());
 	}
 
@@ -73,7 +76,7 @@ public class BookUI extends UI {
 			
 			@Override
 			public void buttonClick(ClickEvent event) {
-				for(Book book : selectedBooks) {
+				for (Book book : selectedBooks) {
 					bookDao.delete(book);
 				}
 				selectedBooks.clear();
@@ -88,8 +91,6 @@ public class BookUI extends UI {
 
 	private void openEditWindow(Book book, String title) {
 		editBookWindow = new Window(title);
-		editBookWindow.setHeight("90%");
-		editBookWindow.setWidth("90%");
 		editBookWindow.center();
 		editBookWindow.setContent(createBookEditLayout(book));
 		this.addWindow(editBookWindow);
@@ -122,6 +123,7 @@ public class BookUI extends UI {
 			}
 		});
 		verticalLayout.addComponent(saveButton);
+		verticalLayout.setMargin(true);
 		return verticalLayout;
 	}
 
@@ -149,11 +151,6 @@ public class BookUI extends UI {
 	private Component createBookTable() {
 		Table table = new Table("Könyvek listája");
 		table.setSizeFull();
-
-		bookDataSource = new BeanContainer<Long, Book>(Book.class);
-		bookDataSource.setBeanIdProperty("id");
-		bookDataSource.addAll(bookDao.listAll());
-
 		table.setContainerDataSource(bookDataSource);
 		table.setVisibleColumns("title", "description", "author", "pubYear");
 		table.addGeneratedColumn("editBook", new ColumnGenerator() {
